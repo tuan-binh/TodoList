@@ -4,7 +4,11 @@ export default function ListTodo({ todo, handleCompleted, handleDelete, viewEdit
       {todo.map((item) => (
         <li key={item.id} style={{ display: 'flex', justifyContent: 'space-between' }}>
           <div>
-            <input type="checkbox" onClick={() => handleCompleted(item.id)} />
+            <input
+              checked={item.completed}
+              type="checkbox"
+              onClick={() => handleCompleted(item.id)}
+            />
             {item.completed ? <s>{item.task}</s> : <span>{item.task}</span>}
           </div>
           <div style={{ display: 'flex', gap: '10px' }}>

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import FormTodo from './components/FormTodo';
 import ListTodo from './components/ListTodo';
@@ -6,7 +6,7 @@ import ListTodo from './components/ListTodo';
 function App() {
   const index = useRef();
 
-  const [todo, setTodo] = useState([]);
+  const [todo, setTodo] = useState(() => JSON.parse(localStorage.getItem('todo')) || []);
 
   const [edit, setEdit] = useState(null);
 
@@ -70,6 +70,10 @@ function App() {
     setEdit(null);
     e.target.todo.value = '';
   };
+
+  useEffect(() => {
+    localStorage.setItem('todo', JSON.stringify(todo));
+  }, [todo]);
 
   return (
     <>
